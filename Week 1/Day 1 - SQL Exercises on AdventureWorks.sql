@@ -53,7 +53,7 @@ SELECT
 FROM FactInternetSales
 GROUP BY SalesTerritoryKey;
 
--- Customer full names with their total sales
+-- Customer full names along with their total sales
 SELECT
     CONCAT(c.FirstName, ' ', c.LastName) AS FullName,
     SUM(f.SalesAmount) AS TotalSales
