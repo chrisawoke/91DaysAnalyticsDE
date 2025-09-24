@@ -126,8 +126,20 @@ ORDER BY TotalSales DESC;
 
 -- Customers who placed more than 10 internet orders.
 SELECT
-    
-
+    c.CustomerKey,
+    CONCAT(c.FirstName, ' ', c.LastName),
+    COUNT(DISTINCT f.SalesOrderNumber) AS OrderCount
+FROM FactInternetSales f
+INNER JOIN DimCustomer c
+    ON f.CustomerKey = c.CustomerKey
+GROUP BY
+    c.CustomerKey,
+    c.FirstName,
+    c.LastName
+HAVING
+    COUNT(DISTINCT f.SalesOrderNumber) > 10
+ORDER BY
+    OrderCount DESC;
 
 
 
