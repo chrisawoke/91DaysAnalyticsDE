@@ -124,6 +124,11 @@ GROUP BY
     d.CalendarYear
 ORDER BY TotalSales DESC;
 
+-- Customers who placed more than 10 internet orders.
+SELECT
+    
+
+
 
 
 
