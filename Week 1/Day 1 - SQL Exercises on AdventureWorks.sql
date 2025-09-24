@@ -105,7 +105,7 @@ HAVING
     SUM(f.SalesAmount) > 100000
 ORDER BY TotalSales DESC;
     
-
+-- Product total sale by category & year
 
 
 
