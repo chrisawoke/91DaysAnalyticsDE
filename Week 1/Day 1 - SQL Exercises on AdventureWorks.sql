@@ -106,7 +106,15 @@ HAVING
 ORDER BY TotalSales DESC;
     
 -- Product total sale by category & year
-
+SELECT
+    pc.EnglishProductCategoryName AS CategoryName,
+    SUM(f.SalesAmount) AS TotalSales
+FROM FactInternetSales f
+INNER JOIN DimProduct p
+    ON f.ProductKey = p.ProductKey
+INNER JOIN DimProductSubcategory ps
+    ON p.ProductSubcategoryKey = ps.ProductSubcategoryKey
+INNER JOIN 
 
 
 
