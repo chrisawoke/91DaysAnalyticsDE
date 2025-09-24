@@ -1,0 +1,1 @@
+→ In GROUP BY, all columns in the SELECT must always be included in the GROUP BY.
