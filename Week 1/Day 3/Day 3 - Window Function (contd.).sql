@@ -17,3 +17,20 @@ ORDER BY
 per order and show each order with a flag AboveAverage if it exceeds 
 the product average.*/
 
+SELECT
+    p.EnglishProductName,
+    f.SalesOrderNumber,
+    f.SalesOrderLineNumber,
+    f.SalesAmount,
+    AVG(f.SalesAmount) OVER (PARTITION BY f.ProductKey) AS AvgProductSales,
+    CASE
+        WHEN f.SalesAmount > AVG(f.SalesAmount) OVER (PARTITION BY f.ProductKey)
+        THEN 'AboveAverage'
+        ELSE 'BelowAverage'
+    END AS OrderPerformance
+FROM FactInternetSales f
+INNER JOIN DimProduct p
+    ON f.ProductKey = p.ProductKey
+ORDER BY
+    p.EnglishProductName,
+    f.SalesAmount DESC;
