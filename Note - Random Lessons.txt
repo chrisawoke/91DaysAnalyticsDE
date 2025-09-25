@@ -1,1 +1,4 @@
 → In GROUP BY, all columns in the SELECT must always be included in the GROUP BY.
+→ GROUP BY cannot do aggregations and provide details at the same time.
+
+✅ Window Functions returns a result for each row of the data.
