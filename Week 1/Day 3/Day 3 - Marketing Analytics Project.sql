@@ -1,5 +1,8 @@
--- Write a query to categorize the products based on price
-
+-- Key Task: clean the dataset and get it ready for analysis
+/*Do the following:
+1. Write a query to categorize the products based on price
+2. 
+*/
 SELECT 
 	ProductID,
 	ProductName,
