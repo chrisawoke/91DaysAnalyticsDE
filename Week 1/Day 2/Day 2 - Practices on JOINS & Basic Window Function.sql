@@ -59,9 +59,22 @@ GROUP BY
     s.SalesTerritoryRegion
 ORDER BY TotalSales DESC;
 
+-- Task 3: Get all sales territories with an average order value above 450.
+SELECT
+    s.SalesTerritoryRegion AS Territory,
+    AVG(f.SalesAmount) AS AvgOrderValue
+FROM FactInternetSales f
+INNER JOIN DimSalesTerritory s
+    ON f.SalesTerritoryKey = s.SalesTerritoryKey
+GROUP BY
+    s.SalesTerritoryRegion
+HAVING 
+    AVG(f.SalesAmount) > 450
+ORDER BY AvgOrderValue DESC;
+
 -- B: Window Functions
 
--- Task 3: Find total of sales per customer
+-- Task 4: Find total of sales per customer
 SELECT
     f.SalesOrderNumber,
     f.SalesAmount,
@@ -75,7 +88,7 @@ FROM FactInternetSales f
 INNER JOIN DimCustomer c 
     ON f.CustomerKey = c.CustomerKey;
 
--- Task 4: Compare each order to the product average
+-- Task 5: Compare each order to the product average
 SELECT
     f.SalesOrderNumber,
     p.EnglishProductName,
