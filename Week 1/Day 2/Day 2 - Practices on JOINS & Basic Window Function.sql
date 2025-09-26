@@ -72,9 +72,20 @@ HAVING
     AVG(f.SalesAmount) > 450
 ORDER BY AvgOrderValue DESC;
 
+-- Task 4: Get the 5 sales territories that generated the most total sales
+SELECT TOP 5
+    s.SalesTerritoryRegion AS Territory,
+    ROUND(SUM(f.SalesAmount), 0) AS TotalSpend
+FROM FactInternetSales f
+INNER JOIN DimSalesTerritory s
+    ON f.SalesTerritoryKey = s.SalesTerritoryKey
+GROUP BY
+    s.SalesTerritoryRegion
+ORDER BY TotalSpend DESC;
+
 -- B: Window Functions
 
--- Task 4: Find total of sales per customer
+-- Task 5: Find total of sales per customer
 SELECT
     f.SalesOrderNumber,
     f.SalesAmount,
@@ -88,7 +99,7 @@ FROM FactInternetSales f
 INNER JOIN DimCustomer c 
     ON f.CustomerKey = c.CustomerKey;
 
--- Task 5: Compare each order to the product average
+-- Task 6: Compare each order to the product average
 SELECT
     f.SalesOrderNumber,
     p.EnglishProductName,

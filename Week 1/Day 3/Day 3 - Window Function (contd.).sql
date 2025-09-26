@@ -34,3 +34,30 @@ INNER JOIN DimProduct p
 ORDER BY
     p.EnglishProductName,
     f.SalesAmount DESC;
+
+-- Show top 3 products by sales for each year
+SELECT
+    ProductName,
+    Years,
+    TotalSales,
+    SalesRank
+FROM(
+SELECT
+    p.EnglishProductName AS ProductName,
+    d.CalendarYear AS Years,
+    SUM(f.SalesAmount) AS TotalSales,
+    RANK() OVER(
+        PARTITION BY d.CalendarYear 
+        ORDER BY SUM(f.SalesAmount) DESC
+        ) AS SalesRank
+FROM FactInternetSales f
+INNER JOIN DimProduct p
+    ON f.ProductKey = p.ProductKey
+INNER JOIN DimDate d
+    ON f.DueDateKey = d.DateKey
+GROUP BY
+    p.EnglishProductName,
+    d.CalendarYear
+) AS RankedSales
+WHERE SalesRank <= 3
+ORDER BY Years, SalesRank;
